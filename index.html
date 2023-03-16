@@ -9,6 +9,189 @@
     <script src='main.js'></script>
 </head>
 <body>
-    TESTE!!!
+    Atualmente no seguimento tecnológico o termo Internet of Things (IoT) é um muito utilizado e aplicado em diversos como na indústria, em automação residencial e em cidades inteligentes. Muitos equipamentos já possuem em seu hardware módulos de conectividade que os permitem enviar e receber dados em uma rede local ou na Internet o que está modificando o comportamento da humanidade sobre como ela mesma está vendo o mundo (IDEALI, 2021). Siebel (2021) aponta a computação em nuvem, big data, inteligência artificial e IoT como motores da transformação digital, definindo a quarta como sensoriamento onipresente das cadeias de valor, de modo que todos os dispositivos nas cadeias se tornem remotamente endereçáveis por máquinas em tempo real ou quase real. Há então uma mudança fundamental no formato da computação e nos valores das informações.  
+Informações que são essencialmente um conjunto de dados, mas vai muito além. A transformação de dados em informação é transformar algo com pouco significado em um recurso de valor e deve ser tratado como tal (FONTES, 2012). Por exemplo, em uma empresa petrolífera estima-se que a implantação de um aplicativo de manutenção preditiva baseada em IA para mais de 500 mil válvulas da refinaria produza centenas de milhões de dólares por ano em redução de custos de manutenção e maior eficiência operacional (SIEBEL, 2021), logo, a integridade desses dados é fundamental para garantir o benefício. O processo para proteger a informação de mau uso, intencional ou acidentalmente, pelas pessoas é dado como segurança da informação. As informações dos mais diversos tipos estão circulando nas redes e na Internet e em grande parte com algum tipo de vulnerabilidade (MORAES, 2020).
+Arquiteturas de segurança tradicionais não existem na arquitetura IoT e Cloud. É desafiador garantir a implementação dos serviços de segurança, como autorização, autenticação, controle de acesso e privacidade, reduzindo os efeitos na usabilidade do usuário. Quanto mais seguro é um sistema, mais penalizada é a performance e vice-versa (MORAES; HAYASHI, 2021).
+Segundo Medeiros (2021), é necessária a comunicação entre os dispositivos IoT e com algum tipo de servidor, porém há muitas divergências de protocolos de comunicação dos dispositivos e são necessárias muitas adaptações. O autor também apresenta um protocolo de Revisão Sistemática da Literatura (RSL) sobre middlewares multiprotocolos para IoT, elucidando quais existem, as suas arquiteturas, os requisitos que são atendidos e quais os protocolos de comunicação são suportados. No mesmo trabalho, como
+forma de atender as lacunas reveladas em sua revisão, é apresentado o MORE4IoT
+(MultiprOtocol MiddlewaRE for IoT) que é um middleware multiprotocolos baseados em microsserviços. Em sua conclusão, o autor indica a necessidade de agregar mecanismos de segurança e privacidade ao software apresentado, uma vez que em sua pesquisa poucos trabalhos relacionados tratam de questões de segurança da informação. Este trabalho de pesquisa propõe dar continuidade ao trabalho citado buscando abordagens e propondo uma possível solução.
+1.1.	Objetivo
+Apontar os mecanismos de segurança nativos ou não dos protocolos IoT da camada de aplicação - como MQTT, AMQP, CoAP e HTTP - e, através de uma RSL, identificar o estado da arte relacionado aos pré-requisitos de segurança e privacidade nas comunicações de dispositivos IoT e se as possíveis soluções que atendam a estes requisitos. Com base nos resultados, implementar uma proposta de mecanismo de segurança e privacidade para o MORE4IoT.
+1.2.	Organização do documento
+
+
+
+ 
+2.	FUNDAMENTAÇÃO TEÓRICA
+2.1.	Internet of Things
+A conectividade sem fios e a miniaturização dos dispositivos eletrônicos trouxe a computação móvel e ubíqua. Enquanto a primeira refere-se à exploração da conexão de dispositivos que podem ser movimentados fisicamente, a segunda diz respeito a integração dos dispositivos de computação com o mundo físico. O termo computação ubíqua significa computação em toda parte e foi introduzido por Weiser (COULOURIS et al., 2013). Tal integração com o mundo físico seria uma forma nova de pensar o mundo considerando os ambientes ocupados pelas pessoas, de forma que os computadores, com formas e funções diferentes, desaparecessem em consequência da psicologia humana. Quando as pessoas aprendem o suficiente sobre algo, ou acostumam se com isso, elas passam a usá-lo de forma inconsciente (WEISER, 1999). 
+Weiser previu o que viria a se chamar hoje de Internet of Things (IoT). O termo foi proposto por Kevin Ashton (MIT Auto-ID) fazendo referência à ligação de informações de etiquetas RFID (Radio Frequency Identification) à Internet. Uma Internet de objetos conectados chamou a atenção de governos e empresas líderes de TI que reconheceram o conceito como um de seus eixos-chave para o futuro crescimento econômico e de sustentabilidade (PALATTELLA et al., 2013). Logo depois, IoT se tornou popular e conhecido por meio de wireless sensor networks (WSN) ubíquas. Com o desenvolvimento das tecnologias de IoT uma ampla gama de dispositivos de detecção inteligentes e minúsculos foi massivamente implantada em uma variedade de aplicações (SHENG et al., 2013). 
+IoT consiste em um sistema de dispositivos de computação inter-relacionados, com identificadores únicos que podem coletar, analisar e trocar dados sem intervenção humana explícita (MAZON-OLIVO; PAN, 2022). 
+2.1.1.	Protocolos IoT
+A partir do conceito de IoT vários padrões e formas de comunicação foram desenvolvidos e colocadas no mercado resultando em uma indústria fragmentada e impossibilitando a interoperabilidade entre dispositivos de diferentes fornecedores. Para sanar a dificuldade várias grandes alianças de padronização foram formadas com base nos interesses de seleções de tecnologia e mercados comerciais (SHENG et al., 2013; ZEGEYE; JEMAL; KORNEGAY, 2023). 
+No cenário da época (2008) o TCP/IP já era o padrão de fato para comunicações de computadores, portanto muitos acreditavam que o IP ofereceria uma arquitetura mais flexível podendo ser o futuro para as redes IoT. A limitação de potência e largura de banda dos dispositivos são desafios na implantação do IPv6. Com extensas sobrecargas de protocolo contra memória e limitações computacionais dos dispositivos, a Internet Engineering Task Force (IETF) assumiu a liderança na padronização de protocolos de comunicação para dispositivos com recursos limitados e desenvolveu vários protocolos de Internet, incluindo o Routing Protocol for Low Power and Lossy Networks (RPL), o Constrained Application Protocol (CoAP) e MAC IEEE802.15.4 entre outros (PALATTELLA et al., 2013; SHENG et al., 2013). Há outras iniciativas para promover a interoperabilidade na IoT é a criação de padrões abertos e protocolos de rede comuns, como por exemplo, o Open Connectivity Foundation (OCF)  e a Connectivity Standards Alliance (CSA) .
+Os protocolos de comunicação de dados para IoT permeiam as camadas da pilha de protocolos TCP/IP, como pode ser observado no Quadro 1 dispostos da camada física à camada de aplicação. Sendo IoT um sistema de dispositivos de computação inter-relacionados, estes dispositivos devem ser capazes de se comunicar com diferentes protocolos ou ser escalonável para incluir outras formas de comunicação, pois cada protocolo tem objetivos e características próprias. Para fazer diferentes dispositivos que utilizam diferentes protocolos e redes se comunicarem é necessária uma camada intermediária, um middleware (MEDEIROS, 2021).
+Quadro 1 Pilha de protocolos TCP/IP em IoT.
+Camada TCP/IP	Protocolo IoT
+5. Aplicação	AMQP, CoAP, HTTP, Matter, MQTT e XMPP 
+4. Transporte	BTP, DTLS, MRP, TCP e UDP 
+3. Internet	6LoWPAN, IPv4, IPv6 e RPL
+2. Interface de Rede	BLE, Dash7, Ethernet, GSM, HomePlugGP, LPWAN, LTE, Thread, Wi-Fi, ZigBee e Z-Wave
+1. Física	IEEE 802.11, IEEE 802.15.4 e IEEE 802.3
+Fontes: (COMER, 2016; CONNECTIVITY STANDARDS ALLIANCE, 2022; MISHRA; KERTESZ, 2020; SHARMA; GONDHI, 2018)
+
+
+Serão apresentadas brevemente algumas informações sobre cada um dos protocolos da camada de aplicação apresentados no Quadro 1. 
+2.1.1.1.	AMQP
+O Advanced Message Queuing Protocol (AMQP) é definido como um protocolo de Internet aberto que permite a troca confiável de mensagens de negócios entre duas partes (OASIS STANDARD, 2012). Dá suporte a arquiteturas request/response e publish/subscribe oferecendo enfileiramento confiável, publicações e assinaturas por tópicos, roteamento e transações flexíveis. O protocolo exige que seja criado um “exchange” com um nome pelo qual os clientes irão se descobrir e, posteriormente, o cliente consumidor criará uma “queue” associada ao exchange.  No processo “binding” as mensagens recebidas no exchange são associadas à queue. Seu cabeçalho tem comprimento de 8 bytes e permite o transporte de conteúdo com tamanho indefinido a depender da implementação (NAIK, 2017; OASIS STANDARD, 2012).
+  
+AMQP usa comunicação orientada a conexão, pois usa TCP como protocolo de transporte padrão e TLS/SSL e SASL para segurança. Oferece Unsettle Format (não confiável) e Settle Format (confiável) como níveis de Quality of Service (QoS) (NAIK, 2017).
+No Quadro 2 é apresentada a estrutura do formato de mensagens do protocolo AMQP conforme texto de OASIS Standard (2012).
+Quadro 2 Formato da mensagem do protocolo AMPQ.
+Estrutura da mensagem	Fields ou descrição
+Annotated Message	Header	Durable, priority, ttl, first-acquirer, delivery-count 
+	Delivery- annotations	Pode ser nulo e é definido pela aplicação. Deve ser referente a entrega.
+	Message- annotations	Destinado a propriedades da mensagem destinadas a infraestrutura e devem ser propagadas ou explicitamente editadas
+	Bare Message	Properties	message-id, user-id, to, subject, reply-to, correlation-id, content-type, content-encoding, absolute-expiry-time, creation-time, group-id, group-sequence, reply-to-group-id
+		Application-properties	String escrita pela aplicação. Intermediários podem usar para filtros ou roteamento.
+		Application-data	Conteúdo do usuário de forma binária e fechada.
+	Footer	Dados sobre a Bare Message ou entrega.
+Fonte: Dados de OASIS Standard(OASIS STANDARD, 2012).
+
+
+O protocolo AMQP versão 1.0 foi aprovado como padrão pela Organization for the Advancement of Structured Information Standards (OASIS) e ISO/IEC 19464 (PRAJAPATI, 2022)
+2.1.1.2.	CoAP
+O Constrained Application Protocol (CoAP) é um protocolo especializado para dispositivos com restrições de hardware e conectividade. Microcontroladores com pequenas quantidades de memórias ROM e RAM e conectados a redes restritas e de área pessoal sem fio de baixa potência, como por exemplo 6LoWPANs, que geralmente tem taxas de transferência próximas a 10 kbit/s e apresentam perdas consideráveis. Projetado para aplicações Machine to Machine(M2M) (SHELBY; HARTKE; BORMANN, 2014).
+O objetivo principal do CoAP é interoperar com HTTP e a Web RESTful por meio de proxies simples. Suporta arquiteturas request/response e resource/observe (variante de publish/subscribe) o que permite comunicação síncrona e assíncrona. Utiliza o Universal Resource Identifier (URI) como para comunicação. Quando um nó publisher envia novos dados na URI, todos os subscribers são notificados sobre o novo valor  (NAIK, 2017).
+Utiliza métodos HTTP, como GET, POST, PUT e DELETE, para requisitar uma ação em uma URI em um servidor. Para interconectar com o HTTP, o CoAP utiliza proxies RESTCoAP, que funcionam como servidor e cliente para permitir a comunicação de inter-redes. A Figura 2 ilustra a funcionalidade geral e o mapeamento entre HTTP e CoAP, tornando possível que clientes de web tradicionais acessem servidores CoAP de forma transparente (SHARMA; GUPTA; CHALLA, 2021). 
+
+No Quadro 3 é apresentada a estrutura do formato de mensagens do protocolo AMQP conforme texto da RFC 7252.
+Quadro 3 Formato da mensagem CoAP.
+Estrutura da mensagem	Tamanho em bits	Descrição
+Header	Ver	2	Versão CoAP.
+	T	2	Tipo de mensagem.
+	TKL	4	Comprimento do campo Token
+	Code	8	Código Request/Response.
+	Message ID	16	Usado para detectar duplicação de mensagens e para responder mensagens que necessitem de confirmação.
+Token	0 a 8	Usado para correlacionar solicitações e respostas.
+Options	-	Pode ser zero ou mais de uma, encerrar a mensagem ou anteceder o Payload com uma marcação. 
+Payload	8+Datagrama	Opcional. Mensagem da aplicação.
+Fonte: Dados da RFC 7252 (SHELBY; HARTKE; BORMANN, 2014)
+
+
+2.1.1.1.	HTTP
+HTTP (HyperText Transfer Protocol) é um protocolo de comunicação utilizado para transferência de dados na Web. Ele foi criado para permitir que sistemas distribuídos e heterogêneos possam comunicar-se de forma eficiente e padronizada. O HTTP é definido por meio de um conjunto de regras que determinam a estrutura das mensagens enviadas entre o cliente e o servidor, assim como a forma como as conexões são estabelecidas e finalizadas.
+A arquitetura do HTTP segue o modelo requisição/resposta. O cliente envia uma requisição ao servidor, que processa essa requisição e retorna uma resposta ao cliente. A requisição é composta por um cabeçalho e, opcionalmente, um corpo, que contém os dados que serão enviados para o servidor. Já a resposta também é composta por um cabeçalho e um corpo, que contém os dados retornados pelo servidor.
+Além disso, o HTTP define uma série de métodos que podem ser utilizados na requisição, tais como GET, POST, PUT e DELETE, entre outros. Cada método tem uma finalidade específica e pode ser utilizado para diferentes tipos de operações. Por exemplo, o método GET é utilizado para recuperar informações do servidor, enquanto o método POST é utilizado para enviar informações para o servidor.
+
+O HyperText Transfer Protocol (HTTP) é o protocolo de camada de aplicação da Web, sendo considerado o coração da mesma. Ele é definido nos documentos [RFC 1945] e [RFC 2616]. Foi originalmente desenvolvido por Tim Berners-Lee. Mais tarde, ele foi desenvolvido conjuntamente pelo IETF e W3C (KUROSE; ROSS, 2013; NAIK, 2017). 
+ O HTTP suporta a arquitetura RESTful Web para solicitações e respostas. Analogamente ao CoAP, o HTTP utiliza o URI em vez de tópicos. O servidor envia os dados por meio do URI e o cliente os recebe por meio de um URI específico. O HTTP é um protocolo baseado em texto e não define o tamanho dos cabeçalhos e payloads de mensagem, dependendo do servidor web ou da tecnologia de programação. No HTTP a comunicação entre o cliente e o servidor é orientada à conexão, portanto usa o TCP como protocolo de transporte padrão. O HTTP não define explicitamente a qualidade de serviço (QoS) e requer suporte adicional para isso (NAIK, 2017). 
+Atualmente o HTTP esta na terceira versão (HTTP/3), definido na RFC 9114
+
+
+Arquitetura 
+Cabeçalho
+2.1.1.2.	Matter
+Smart Home ou casa inteligente é um conceito que vem se tornando cada vez mais popular, porém há uma fragmentação da indústria, pois diferentes fornecedores usam diferentes protocolos de comunicação sem fio (Wi-Fi, Bluetooth, BLE, Zigbee, Z-Wave) resultando em pouca interoperabilidade e falta de recursos cruzados. Casas modernas tem diversos dispositivos inteligentes e cada um destes dispositivos pode usar um aplicativo diferente (Figura 2) e para alcançar uma casa verdadeiramente inteligente isso pode ser um empecilho, pois em muitos casos não há interoperabilidade além da dependência de uma conexão com a Internet.  (ZEGEYE; JEMAL; KORNEGAY, 2023).
+Inicialmente de chamado de Project Connected Home over IP (Project CHIP), o Matter é um padrão de comunicação universal, publicado pela CSA, baseado em IPv6 para dispositivos domésticos inteligentes, que define o que será implantado nos dispositivos na camada de aplicação suprimindo as diferenças da camada de interface de rede – principalmente BLE, Thread e Wi-Fi – e suas diferentes topologias (Figura 3) e com a finalidade de manter a interoperabilidade (CONNECTIVITY STANDARDS ALLIANCE, 2022; ZEGEYE; JEMAL; KORNEGAY, 2023).
+Uma divisão em camadas na arquitetura tem o objetivo de separar as diversas responsabilidades e garantir um adequado nível de encapsulamento entre as diferentes partes da pilha de protocolos, conforme a especificação (op. cit.). Na  Figura 4 há uma comparação das camadas TCP/IP, Matter e modelo OSI e no Quadro 3 segue e uma breve descrição das funções das camadas definidas na especificação do protocolo Matter.
+Figura 5 Camadas do protocolo Matter, Modelo OSI e TCP/IP
+
+
+
+Fonte: (GOOGLE DEVELOPERS CENTER, 2022)
+
+
+
+Quadro 4 Camadas da arquitetura do protocolo Matter.
+Matter layers	Descrição 
+Aplication Layer	lida com a lógica de negócios de alto nível de um dispositivo, contendo a lógica para lidar com os recursos do dispositivo.
+Data model	lida com os elementos de dados e verbos que suportam a funcionalidade do aplicativo. O Aplicativo opera nessas estruturas de dados.
+Interaction Model	define um conjunto de interações que podem ser executadas entre um dispositivo cliente e servidor. 
+Action Framing	converte uma ação construída usando o Modelo de Interação em um formato binário empacotado prescrito para codificar para transmissão de rede.
+Security	criptografa a mensagem e anexa um código de autenticação de mensagens para garantir que os dados permaneçam confidenciais e autênticos entre o remetente e o destinatário da mensagem.
+Message Framing + Routing	constrói o formato de carga útil com campos de cabeçalho obrigatórios e opcionais e informações de roteamento lógico.
+IP Framing + Transport Managmet	gerencia os dados IP que são enviados para o protocolo de transporte subjacente (TCP ou Message Reliability Protocol (MRP))
+
+Fonte: (CONNECTIVITY STANDARDS ALLIANCE, 2022)
+
+Segundo a especificação do Matter (op. cit.) o formato de mensagem suporta vários tipos de comunicação, como sessões seguras unicast e mensagens de grupo multicast. A criptografia de mensagens é feita de maneira uniforme e assume que as chaves simétricas são compartilhadas entre as partes que se comunicam. As mensagens Matter são usadas para transmitir dados e/ou comandos específicos do aplicativo e contêm um Protocol ID e um Protocol Opcode para identificar a mensagem e sua estrutura. As mensagens também têm um Exchange ID para relacionar a mensagem a uma troca específica entre dois nós. Certos tipos de mensagens podem confirmar o recebimento de mensagens anteriores para garantir a entrega em transportes não confiáveis. Todos os campos inteiros de vários bytes são transmitidos na ordem de bytes little-endian, a menos que indicado de outra forma.
+No Quadro 5 é apresentada a definição do formato de mensagens do protocolo Matter e breve definição dos campos, conforme a especificação publicada pela CSA. 
+Quadro 5 Definição do formato da mensagem de Matter.
+Message Fields	Bytes	Descrição
+Header	Message Length	2	Inteiro sem sinal que especifica o comprimento total da mensagem em bytes.
+	Message Flags	1	Conjunto de bits indicando subcampos: versão, presença do Source Node ID e o tamanho do Destination Node ID.
+	Session ID	2	Inteiro sem sinal que identifica a sessão associada à mensagem.
+	Security Flags	1	Conjunto de bits indicando subcampos: Privacy Flag, Control Flag, Message Extensions, e Session Type. 
+	Message Counter	4	Um valor inteiro sem sinal gerado com base no tipo de sessão e incrementado para cada mensagem única gerada.
+	Source Node ID	0/8	Identificador exclusivo do nó de origem. Opcional.
+	Destination Node ID	0/2/8	Identificador exclusivo do nó de destino. Opcional.
+	Message Extensions 	var	Bloco de dados de comprimento variável que permite retrocompatibilidade.
+Payload (encrypted)
+	Protocol Message	Protocol Header	Exchange Flags	1	Conjunto de bits indicando subcampos: Initiator, Acknowledgement, Reliability, Secured Extensions e Vendor. 
+			Protocol Opcode	1	Inteiro sem sinal que identifica o tipo da mensagem.
+			Exchange ID	2	Inteiro sem sinal que identifica a Exchange à qual a mensagem pertence.
+			Protocol ID	2	Inteiro sem sinal que identifica o protocolo no qual o Protocol Opcode da mensagem é definido.
+			Protocol Vendor ID	2	Inteiro sem sinal e opcional que contém o namespace do Vendor ID para o campo Protocol ID.
+			Acknowledged Message Counter 	4	Inteiro sem sinal e opcional contendo o Message Counter de uma mensagem anterior que está sendo confirmada.
+			Secured Extensions	var	Bloco de dados de comprimento variável que permite retrocompatibilidade.
+		Application Payload	var	Zero ou mais bytes com os dados da mensagem enviada pela aplicação.
+Footer	Message Integrity Check	var	Valor de verificação de integridade da mensagem.
+Fonte: Dados da especificação do protocolo matter(CONNECTIVITY STANDARDS ALLIANCE, 2022)
+
+
+2.1.1.3.	MQTT
+Definição
+Arquitetura 
+Cabeçalho
+
+(BANKS et al., 2019)
+2.1.1.4.	XMPP
+Definição
+Arquitetura 
+Cabeçalho
+Comparativo dos protocolos
+Protocolo	Modelo	Cabeçalho	Mensagens	segurança
+AMQP	Publisher/Subscriber e Request/Response	8 bytes		TLS/SSL, IPSec, SASL
+CoAP	Request/Response			Sim
+HTTP	Request/Response			Sim (HTTPS)
+Matter				Sim
+MQTT	Publisher/Subscriber			Sim (MQTTS)
+XMPP				Sim
+
+2.2.	Middleware
+Entende-se middleware como a uma camada de software que fornece uma abstração de programação, assim como o uma forma de ocultar a heterogeneidade das partes envolvidas na comunicação de um sistema distribuído (COULOURIS et al., 2013).
+Para IoT a interoperabilidade entre diferentes tipos de dispositivos e sistemas – com protocolos diferentes - é um requisito, logo um middleware opera como um hub centralizado onde os sistemas utilitários se comunicam com seus próprios produtores, unidades de coleta de dados, sensores e uns com os outros (JOSEPH et al., 2017). 
+2.2.1.	MORE4IoT
+O MORE4IoT (MultiprOtocol MiddlewRE for Internet of Things) é um middleware multiprotocolo que utiliza microsserviços para viabilizar aplicações na IoT. Ele foi criado para cumprir diversos requisitos e superar os desafios de um middleware multiprotocolo para IoT. Com isso, o MORE4IoT provê recursos fundamentais para dar suporte a diferentes aplicações e se comunicar com variados tipos de dispositivos presentes na IoT. Ele também oferece serviços que podem ser implantados localmente ou na nuvem, para gerenciar recursos heterogêneos da IoT, controlar ações, armazenar e recuperar dados, além de gerenciar e descobrir serviços (MEDEIROS, 2021).
+Segundo Medeiros (op. cit.), os requisitos funcionais de gerenciamento de recursos e dados são comuns em muitos middlewares da IoT. No entanto, o controle de dispositivos por parte das aplicações é frequentemente negligenciado, limitando a capacidade das aplicações de controlar completamente seus dispositivos. Além disso, é crucial que os middlewares forneçam ferramentas para auxiliar no desenvolvimento de aplicações e reduzir a complexidade na comunicação com diferentes protocolos. Portanto, esses requisitos estão estreitamente ligados à interoperabilidade, um requisito não funcional importante para os middlewares da IoT.
+No Quadro 6 são apresentados os requisitos funcionais atendidos pelo MORE4IoT.
+Quadro 6 Requisitos funcionais atendidos pelo MORE4IoT.
+Requisito	Descrição
+Gerenciamento de Recursos	•	Integrar vários recursos heterogêneos que utilizam diferentes protocolos de comunicação para permitir a troca de dados e controlar recursos físicos. 
+•	Encapsular dispositivos e aplicações em estruturas únicas que abstraem as suas características individuais, como funcionalidades, representação dos dados produzidos e protocolos de comunicação utilizados.
+Gerenciamento de Dados	•	Gerenciar e integrar inúmeros dispositivos e fontes de dados, fornecendo serviços de armazenamento e processamento de dados históricos. 
+Mecanismos de Controle	•	Intermediar e disponibilizar o controle dos dispositivos para as aplicações. 
+•	Traduzir especificações para controlar o tráfego de dados e comandos de controle.
+Disponibilização das Funcionalidades	•	Fornecer meios padronizados de acesso aos recursos, dados gerenciados e mecanismos de controle por meio de abstrações bem definidas, seguindo os padrões definidos na Engenharia de Software. 
+Ferramentas para Desenvolvimento	•	Fornecer ferramentas de Engenharia de Software, como SDK, API e interface visual, para facilitar o desenvolvimento de aplicações e utilização de dispositivos. 
+Fonte: (MEDEIROS, 2021)
+
+
+A arquitetura do MORE4IoT é baseada em microsserviços, embora este tipo de arquitetura não seja amplamente utilizada pelos middlewares IoT. No entanto, essa arquitetura pôde auxiliar e abordar as funcionalidades necessárias para aplicações e dispositivos na IoT, atendendo aos requisitos funcionais apontados (op. cit.).
+Como pode ser observado na Figura 5, o MORE4IoT possui quatro camadas de abstração que definem as funcionalidades dos microsserviços. São elas: A camada de gerenciamento; a camada de dependência dos microsserviços; a camada de comunicação e a camada externa ao middleware.
+
+Na camada de gerenciamento existem três microsserviços distintos: O Resource manager que controla recursos como sensores, atuadores, dados de uma aplicação, etc; O Action manager que é responsável por receber e validar novas actions, além de notificar o Action Communicator para enviar essas actions por diferentes protocolos. O Data manager que armazena e recupera informações dos sensores, atuadores e processamento das aplicações por meio da inserção e consultas desses dados. Cada um dos microsserviços desempenha um papel vital no gerenciamento de dispositivos IoT. A divisão garante as responsabilidades únicas para cada microsserviço de gerenciamento (op. cit.).
+Na camada de dependência dos microsserviços existe o importante microsserviço service registry que possui a função de registrar os endereços dos microsserviços do middleware (op. cit.).
+Na camada de comunicação estão presentes os microsserviços Service Cataloger, Input Communicator e o Action Communicator. Por isso ela é responsável por gerenciar a comunicação entre os dispositivos IoT e a aplicação, bem como a comunicação interna entre os microsserviços do middleware. O Service Cataloger é responsável por manter um catálogo de serviços disponíveis, permitindo que a aplicação encontre os serviços necessários para se comunicar com os dispositivos. O Input Communicator é responsável por receber os dados dos dispositivos e enviá-los para o Data Manager, enquanto o Action Communicator é responsável por receber as ações da aplicação e encaminhá-las para o Action Manager, que por sua vez as envia para os dispositivos por meio dos protocolos adequados. Em resumo, a camada de comunicação permite que a aplicação e os dispositivos IoT possam se comunicar de maneira eficiente e segura, utilizando diferentes protocolos de comunicação (op. cit.).
+Já a camada externa busca oferecer a capacidade de comunicação por diferentes protocolos, tais como: o MQTT, o CoAP, o HTTP, AMQP e LoRaWAN. O protocol adapter é o componente fundamental para que os dispositivos possam enviar e receber dados, assim como as aplicações possam receber, enviar e controlar os dispositivos. Observa-se que este componente fica do lado do dispositivo para facilitar a comunicação com os microsserviços do MORE4IoT (op. cit.).
+Em sua conclusão, Medeiros (op. cit.) indica a necessidade de agregar mecanismos de segurança e privacidade ao software apresentado, uma vez que em sua pesquisa poucos trabalhos tratam de questões de segurança e privacidade de dados. 
+2.3.	Segurança da informação
+Informação é essencialmente um conjunto de dados, mas vai muito além. A transformação de dados em informação é transformar algo com pouco significado em um recurso de valor e deve ser tratado como tal (FONTES, 2012). Por exemplo, em uma empresa petrolífera estima-se que a implantação de um aplicativo de manutenção preditiva baseada em IA para mais de 500 mil válvulas de refinaria produza centenas de milhões de dólares por ano em redução de custos de manutenção e maior eficiência operacional (SIEBEL, 2021), logo, a integridade desses dados é fundamental para garantir o benefício. O processo para proteger a informação de mau uso, intencional ou acidentalmente, pelas pessoas é dado como segurança da informação. As informações dos mais diversos tipos estão circulando nas redes e na Internet e em grande parte com algum tipo de vulnerabilidade (MORAES, 2020).
+Para trafegar qualquer tipo de dados/informações em redes locais ou na Internet é importante que estes estejam seguros, mas como saber se a segurança está presente em uma comunicação de dados? Para isto são considerados três propriedades fundamentais para a segurança de dados: a Confidencialidade, Integridade e Disponibilidade (KIM; SOLOMON, 2014). 
+Resumidamente, implementar a CIA triad  garante: 1º – Que o conteúdo de uma mensagem seja acessado apenas pelas partes endereçadas e autorizadas; 2º – Que a mensagem não sofra nenhum tipo de alteração proposital, que chegue ao destino exatamente como saiu da origem; 3º – Que o sistema ou mensagem estará acessível quando (ou enquanto) o usuário precisar (MORAES, 2010; MORAES; HAYASHI, 2021).
+2.3.1.	Segurança em IoT
+Arquiteturas de segurança tradicionais não existem na arquitetura IoT e Cloud. É desafiador garantir a implementação dos serviços de segurança, como autorização, autenticação, controle de acesso e privacidade, reduzindo os efeitos na usabilidade do usuário. Quanto mais seguro é um sistema, mais penalizada é a performance e vice-versa (MORAES; HAYASHI, 2021).
+Morais e Hayashi (2021) destacam que a segurança em IoT não deve ser tratada de forma diferente de outras tecnologias, e que os princípios fundamentais de ainda são aplicáveis. Para garantir a segurança em IoT, é necessário abordar aspectos tecnológicos, processos e pessoas, adaptando esses princípios aos desafios apresentados pelo uso dessas tecnologias. A Figura 4 ilustra que as implementações de segurança da informação têm custos como aumento de processamento e memória e, consequentemente, maior consumo energético, o que é um problema quando se fala de dispositivos IoT, enquanto do lado oposto da “balança” os riscos se mantêm, pois não existe segurança perfeita 
 </body>
 </html>
